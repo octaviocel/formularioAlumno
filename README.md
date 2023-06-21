@@ -6,10 +6,10 @@ Por defecto se ejecuta en el puerto 8080
 ### Variables de entorno
 Se debe crear en el root del archivo back un file llamado **.env**
 Dentro del env van las siguientes variables para el envio de correo por SMTP
-> STMP_EMAIL ***tipo de email***
-> SMTP_EMAIL_SENDER ***correo de donde se envia o de configuracion smtp***
-> SMTP_EMAIL_PASSWORD ***contraseña de smtp***
-> SMTP_EMAIL_PORT ***puerto de envio***
+> STMP_EMAIL ***tipo de email*** <br>
+> SMTP_EMAIL_SENDER ***correo de donde se envia o de configuracion smtp*** <br>
+> SMTP_EMAIL_PASSWORD ***contraseña de smtp*** <br>
+> SMTP_EMAIL_PORT ***puerto de envio*** <br>
 
 ### Base de datos
 Ir a la dirección **back/grails-app/conf/application.yml**
