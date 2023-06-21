@@ -56,7 +56,8 @@ Creación de Usuario
 ![Creado Exitoso](https://github.com/octaviocel/formularioAlumno/assets/61020722/86eefe38-81d5-424a-8538-87bc60d1d5a8)
 
 Envio de correo
-![Correo Enviado](https://github.com/octaviocel/formularioAlumno/assets/61020722/ce028fbd-1237-4b9e-bb57-8ba19137554c)
+![Correo muestra](https://github.com/octaviocel/formularioAlumno/assets/61020722/8e94cd31-58c7-4baf-9d02-03d05a08c2db)
+
 
 
 
