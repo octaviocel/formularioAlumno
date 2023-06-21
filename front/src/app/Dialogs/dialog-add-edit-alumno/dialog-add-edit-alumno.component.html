@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>{{ tituloAccion }} Alumno</h2>
+<mat-dialog-content class="mat-typography">
+
+    <div [ngClass]="{'content-overlay': isLoading}">
+        <form [formGroup]="alumnoForm">
+            <mat-grid-list cols="1" rowHeight="120px">
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline" style="width: 70%;">
+                        <mat-label>Matricula</mat-label>
+                        <input matInput formControlName="matricula" autocomplete="off" pattern="[0-9]{9}">
+                        <mat-error *ngIf="alumnoForm.get('matricula')?.hasError('pattern')">La matricula debe contener
+                            exactamente 9 dígitos numéricos.</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline" style="width: 70%;">
+                        <mat-label>Nombre Completo</mat-label>
+                        <input matInput formControlName="nombre" autocomplete="off" pattern="[a-zA-Z ]{20,}">
+                        <mat-error *ngIf="alumnoForm.get('nombre')?.hasError('pattern')">El nombre debe contener un
+                            mínimo
+                            de 30 caracteres alfabéticos sin caracteres especiales.</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline" style="width: 70%;">
+                        <mat-label>Correo</mat-label>
+                        <input matInput formControlName="correo" autocomplete="off"
+                            pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                        <mat-error *ngIf="alumnoForm.get('correo')?.hasError('pattern')">El correo no es
+                            válido.</mat-error>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <mat-form-field appearance="outline" style="width: 70%;">
+                        <mat-label>Nivel Académico</mat-label>
+                        <mat-select formControlName="nivel_academico" (selectionChange)="cambiarProgramas()">
+                            <mat-option *ngFor="let nivel of listaNivelesAcademicos" [value]="nivel">
+                                {{ nivel }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-grid-tile>
+                <ng-container *ngIf="alumnoForm.get('nivel_academico')?.value !== 'Bachillerato'; else otroBloque">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="outline" style="width: 70%;">
+                            <mat-label>Programa Académico</mat-label>
+                            <mat-select formControlName="programa_academico">
+                                <mat-option *ngFor="let programa of listaProgramasAcademicos" [value]="programa">
+                                    {{ programa }}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </ng-container>
+                <ng-container *ngIf="tituloAccion === 'Editar'; else otroBloque">
+                    <mat-grid-tile>
+                        <mat-form-field appearance="outline" style="width: 70%;">
+                            <mat-label>Semestre</mat-label>
+                            <input matInput formControlName="semestre" autocomplete="off" type="number" min="1"
+                                max="10">
+                            <mat-error
+                                *ngIf="alumnoForm.get('semestre')?.invalid && (alumnoForm.get('semestre')?.dirty || alumnoForm.get('semestre')?.touched)">
+                                El semestre debe ser un valor numérico entre 1 y 10.
+                            </mat-error>
+                        </mat-form-field>
+                    </mat-grid-tile>
+                </ng-container>
+
+                <ng-template #otroBloque>
+
+                </ng-template>
+
+            </mat-grid-list>
+        </form>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
+    <button mat-raised-button cdkFocusInitial (click)="addEditAlumno()" [disabled]="alumnoForm.invalid"
+        color="primary">{{ botonAccion }}</button>
+    <div *ngIf="isLoading" class="spinner-overlay" style="margin: 5px;">
+        <mat-spinner diameter="32"></mat-spinner>
+    </div>
+</mat-dialog-actions>
